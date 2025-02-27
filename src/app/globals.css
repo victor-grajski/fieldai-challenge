@@ -4,4 +4,7 @@
     border: 1px solid black;
     position: relative;
     background-image: url('https://gdb.voanews.com/29242cac-bc73-4a80-aae2-cc620055d86a_cx0_cy2_cw0_w1200_r1.jpg');
+    user-select: none; /* Prevent text selection */
+    -webkit-user-select: none; /* Safari-specific */
+    -webkit-touch-callout: none; /* Prevents long-press menu on iOS */
   }
