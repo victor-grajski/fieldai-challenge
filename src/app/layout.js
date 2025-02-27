@@ -3,8 +3,9 @@
 import { useState } from "react";
 import "./globals.css";
 import DPad from '../components/DPad'
+import StatusBar from "@/components/StatusBar";
 
-export default function RootLayout({ children }) {
+export default function RootLayout() {
   const [leftSpeed, setLeftSpeed] = useState(0)
   const [rightSpeed, setRightSpeed] = useState(0)
   const [upSpeed, setUpSpeed] = useState(0)
@@ -12,13 +13,11 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className="container">
-        <p>Left: {leftSpeed}</p>
-        <p>Right: {rightSpeed}</p>
-        <p>Up: {upSpeed}</p>
-        <p>Down: {downSpeed}</p>
-        <DPad setLeftSpeed={setLeftSpeed} setRightSpeed={setRightSpeed} setUpSpeed={setUpSpeed} setDownSpeed={setDownSpeed} />
-        {/* {children} */}
+      <body>
+        <div className="container">
+          <StatusBar leftSpeed={leftSpeed} rightSpeed={rightSpeed} upSpeed={upSpeed} downSpeed={downSpeed} />
+          <DPad setLeftSpeed={setLeftSpeed} setRightSpeed={setRightSpeed} setUpSpeed={setUpSpeed} setDownSpeed={setDownSpeed} />
+        </div>
       </body>
     </html>
   );

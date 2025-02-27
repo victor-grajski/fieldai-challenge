@@ -1,6 +1,7 @@
 'use client'
 import styles from "./DPad.module.css";
 import { useEffect, useState } from "react";
+import { FaChevronLeft, FaChevronRight, FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
     const [leftClicked, setLeftClicked] = useState(false)
@@ -10,6 +11,7 @@ const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
 
     useEffect(() => {
         if (leftClicked) {
+            setLeftSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
             const intervalId = setInterval(() => {
                 setLeftSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
             }, 1000)
@@ -22,6 +24,7 @@ const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
     
     useEffect(() => {
         if (rightClicked) {
+            setRightSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
             const intervalId = setInterval(() => {
                 setRightSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
             }, 1000)
@@ -34,6 +37,7 @@ const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
 
     useEffect(() => {
         if (upClicked) {
+            setUpSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
             const intervalId = setInterval(() => {
                 setUpSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
             }, 1000)
@@ -46,6 +50,7 @@ const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
 
     useEffect(() => {
         if (downClicked) {
+            setDownSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
             const intervalId = setInterval(() => {
                 setDownSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
             }, 1000)
@@ -65,6 +70,9 @@ const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
                 onMouseDown={() => setLeftClicked(true)}
                 onMouseUp={() => setLeftClicked(false)}
             >
+                <div className={styles.chevronContainer} >
+                    <FaChevronLeft color="white" />
+                </div>
             </div>
             <div 
                 className={styles.rightContainer} 
@@ -73,6 +81,9 @@ const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
                 onMouseDown={() => setRightClicked(true)}
                 onMouseUp={() => setRightClicked(false)}
             >
+                <div className={styles.chevronContainer} >
+                    <FaChevronRight color="white" />
+                </div>
             </div>
             <div 
                 className={styles.upContainer} 
@@ -81,6 +92,9 @@ const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
                 onMouseDown={() => setUpClicked(true)}
                 onMouseUp={() => setUpClicked(false)}
             >
+                <div className={styles.chevronContainer} >
+                    <FaChevronUp color="white" />
+                </div>
             </div>
             <div 
                 className={styles.downContainer} 
@@ -89,7 +103,11 @@ const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
                 onMouseDown={() => setDownClicked(true)}
                 onMouseUp={() => setDownClicked(false)}
             >
+                <div className={styles.chevronContainer} >
+                    <FaChevronDown color="white" />
+                </div>
             </div>
+            <div className={styles.centerContainer} />
         </div>
     )
 }
