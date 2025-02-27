@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 
 const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
     const [leftClicked, setLeftClicked] = useState(false)
+    const [rightClicked, setRightClicked] = useState(false)
+    const [upClicked, setUpClicked] = useState(false)
+    const [downClicked, setDownClicked] = useState(false)
 
     useEffect(() => {
         if (leftClicked) {
             const intervalId = setInterval(() => {
-                setLeftSpeed(prevSpeed => prevSpeed + 10)
+                setLeftSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
             }, 1000)
 
             return () => clearInterval(intervalId)
@@ -17,27 +20,41 @@ const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
         }
     }, [leftClicked])
     
-    // every second, increase speed
-    // const handleLeft = (e) => {
-    //     e.preventDefault()
+    useEffect(() => {
+        if (rightClicked) {
+            const intervalId = setInterval(() => {
+                setRightSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
+            }, 1000)
 
-    //     setInterval
-    // }
+            return () => clearInterval(intervalId)
+        } else {
+            setRightSpeed(0)
+        }
+    }, [rightClicked])
 
-    // const handleRight = (e) => {
-    //     e.preventDefault()
+    useEffect(() => {
+        if (upClicked) {
+            const intervalId = setInterval(() => {
+                setUpSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
+            }, 1000)
 
-    // }
+            return () => clearInterval(intervalId)
+        } else {
+            setUpSpeed(0)
+        }
+    }, [upClicked])
 
-    // const handleUp = (e) => {
-    //     e.preventDefault()
+    useEffect(() => {
+        if (downClicked) {
+            const intervalId = setInterval(() => {
+                setDownSpeed(prevSpeed => prevSpeed + 1 <= 5 ? prevSpeed + 1 : 5)
+            }, 1000)
 
-    // }
-
-    // const handleDown = (e) => {
-    //     e.preventDefault()
-
-    // }
+            return () => clearInterval(intervalId)
+        } else {
+            setDownSpeed(0)
+        }
+    }, [downClicked])
 
     return (
         <div className={styles.container}>
@@ -48,28 +65,30 @@ const DPad = ({ setLeftSpeed, setRightSpeed, setUpSpeed, setDownSpeed }) => {
                 onMouseDown={() => setLeftClicked(true)}
                 onMouseUp={() => setLeftClicked(false)}
             >
-                Left
             </div>
             <div 
                 className={styles.rightContainer} 
-                onTouchStart={(e) => handleRight(e)}
-                // onClick={(e) => handleRight(e)}
+                onTouchStart={() => setRightClicked(true)}
+                onTouchEnd={() => setRightClicked(false)}
+                onMouseDown={() => setRightClicked(true)}
+                onMouseUp={() => setRightClicked(false)}
             >
-                Right
             </div>
             <div 
                 className={styles.upContainer} 
-                onTouchStart={(e) => handleUp(e)}
-                // onClick={(e) => handleUp(e)}
+                onTouchStart={() => setUpClicked(true)}
+                onTouchEnd={() => setUpClicked(false)}
+                onMouseDown={() => setUpClicked(true)}
+                onMouseUp={() => setUpClicked(false)}
             >
-                Up
             </div>
             <div 
                 className={styles.downContainer} 
-                onTouchStart={(e) => handleDown(e)}
-                // onClick={(e) => handleDown(e)}
+                onTouchStart={() => setDownClicked(true)}
+                onTouchEnd={() => setDownClicked(false)}
+                onMouseDown={() => setDownClicked(true)}
+                onMouseUp={() => setDownClicked(false)}
             >
-                Down
             </div>
         </div>
     )
